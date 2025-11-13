@@ -1,0 +1,1425 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Extincteurs Maroc - Vente & Livraison</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --primary: #e53935;
+      --primary-dark: #b71c1c;
+      --secondary: #1e1e1e;
+      --bg: #f7f7f7;
+      --card-bg: #ffffff;
+      --accent: #ffcc00;
+      --radius-lg: 18px;
+      --radius-xl: 26px;
+      --shadow-soft: 0 14px 30px rgba(0, 0, 0, 0.12);
+      --shadow-light: 0 10px 20px rgba(0, 0, 0, 0.06);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: radial-gradient(circle at top left, #ffebee 0, #f7f7f7 45%, #ffffff 100%);
+      color: #222;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      transition: background 0.3s ease;
+    }
+
+    body.lang-ar {
+      direction: rtl;
+      font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont,
+        sans-serif;
+    }
+
+    main {
+      flex: 1;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* Top bar / Header */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+    }
+
+    .nav {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 14px;
+      background: conic-gradient(from 200deg, #ff5252, #ff1744, #b71c1c, #ff5252);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 900;
+      box-shadow: 0 8px 18px rgba(229, 57, 53, 0.5);
+    }
+
+    .brand-text-main {
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      font-size: 14px;
+      color: var(--primary-dark);
+    }
+
+    .brand-text-sub {
+      font-size: 11px;
+      color: #666;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .lang-switch {
+      display: flex;
+      border-radius: 999px;
+      background: #f0f0f0;
+      padding: 3px;
+      box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.04);
+    }
+
+    .lang-btn {
+      border: none;
+      background: transparent;
+      padding: 6px 12px;
+      font-size: 11px;
+      font-weight: 600;
+      border-radius: 999px;
+      cursor: pointer;
+      color: #555;
+      transition: all 0.18s ease;
+    }
+
+    .lang-btn.active {
+      background: #ffffff;
+      color: var(--primary-dark);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      transform: translateY(-1px);
+    }
+
+    .nav-contact {
+      display: none;
+    }
+
+    @media (min-width: 768px) {
+      .nav-contact {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 12px;
+        color: #444;
+      }
+
+      .nav-contact span {
+        font-weight: 600;
+        color: var(--primary-dark);
+      }
+    }
+
+    /* Sections */
+    section {
+      padding: 24px 16px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* Hero */
+    .hero {
+      padding-top: 22px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 24px;
+      align-items: center;
+    }
+
+    .hero-card {
+      background: linear-gradient(
+          120deg,
+          rgba(183, 28, 28, 0.06),
+          rgba(229, 57, 53, 0.02)
+        ),
+        #ffffff;
+      border-radius: var(--radius-xl);
+      padding: 20px 18px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(0, 0, 0, 0.03);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-chip-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+      align-items: center;
+    }
+
+    .hero-chip {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: rgba(229, 57, 53, 0.07);
+      color: var(--primary-dark);
+      font-weight: 700;
+    }
+
+    .hero-chip-secondary {
+      font-size: 10px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      border: 1px dashed rgba(229, 57, 53, 0.3);
+      color: #444;
+      background: rgba(255, 255, 255, 0.6);
+    }
+
+    .hero-title {
+      font-size: 26px;
+      line-height: 1.25;
+      margin-bottom: 10px;
+      font-weight: 800;
+      color: #111;
+    }
+
+    .hero-subtitle {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 16px;
+    }
+
+    .hero-subtitle strong {
+      color: var(--primary-dark);
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 16px;
+      font-size: 11px;
+    }
+
+    .hero-badge {
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.04);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #444;
+    }
+
+    .hero-badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--primary);
+      box-shadow: 0 0 0 4px rgba(229, 57, 53, 0.26);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .btn {
+      border-radius: 999px;
+      padding: 9px 16px;
+      border: none;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.18s ease;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      box-shadow: 0 12px 20px rgba(183, 28, 28, 0.4);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 28px rgba(183, 28, 28, 0.55);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: #333;
+      border: 1px solid rgba(0, 0, 0, 0.16);
+      backdrop-filter: blur(6px);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--primary);
+      color: var(--primary-dark);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+      transform: translateY(-1px);
+    }
+
+    .hero-note {
+      font-size: 11px;
+      color: #666;
+      margin-top: 6px;
+    }
+
+    .hero-note span {
+      color: var(--primary-dark);
+      font-weight: 600;
+    }
+
+    .hero-visual {
+      position: relative;
+    }
+
+    .hero-showcase {
+      background: radial-gradient(circle at top, #ffebee 0, #ffffff 55%);
+      border-radius: var(--radius-xl);
+      padding: 18px 14px 10px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(0, 0, 0, 0.04);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-showcase-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #999;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hero-showcase-label::before {
+      content: "";
+      display: inline-block;
+      width: 26px;
+      height: 1px;
+      background: linear-gradient(90deg, var(--primary), transparent);
+    }
+
+    .hero-ext-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .mini-card {
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 16px;
+      padding: 8px 8px 10px;
+      box-shadow: var(--shadow-light);
+      border: 1px solid rgba(0, 0, 0, 0.03);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .mini-card img {
+      height: 110px;
+      object-fit: contain;
+      margin: 0 auto 4px;
+    }
+
+    .mini-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: #333;
+    }
+
+    .mini-sub {
+      font-size: 11px;
+      color: #777;
+    }
+
+    .mini-price {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--primary-dark);
+    }
+
+    .mini-pill {
+      font-size: 10px;
+      padding: 3px 7px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.04);
+      align-self: flex-start;
+      color: #555;
+    }
+
+    .hero-tag-floating {
+      position: absolute;
+      right: 12px;
+      bottom: 12px;
+      background: #111;
+      color: white;
+      padding: 8px 10px;
+      border-radius: 999px;
+      font-size: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.28);
+    }
+
+    .hero-tag-floating span {
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    /* Products */
+    .section-title {
+      font-size: 20px;
+      margin-bottom: 6px;
+      font-weight: 800;
+      color: #111;
+    }
+
+    .section-subtitle {
+      font-size: 13px;
+      color: #666;
+      margin-bottom: 18px;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 18px;
+    }
+
+    .product-card {
+      background: rgba(255, 255, 255, 0.98);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-light);
+      border: 1px solid rgba(0, 0, 0, 0.04);
+      padding: 14px 14px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .product-tag {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.78);
+      color: #fff;
+    }
+
+    body.lang-ar .product-tag {
+      left: auto;
+      right: 12px;
+    }
+
+    .product-image-wrapper {
+      background: linear-gradient(120deg, #ffebee, #ffffff);
+      border-radius: 12px;
+      padding: 12px 8px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 4px;
+    }
+
+    .product-image-wrapper img {
+      height: 170px;
+      object-fit: contain;
+    }
+
+    .product-badge-size {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      padding: 5px 9px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--primary-dark);
+    }
+
+    body.lang-ar .product-badge-size {
+      right: auto;
+      left: 12px;
+    }
+
+    .product-title {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 4px;
+      color: #222;
+    }
+
+    .product-price {
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--primary-dark);
+      margin-bottom: 4px;
+    }
+
+    .product-price span {
+      font-size: 12px;
+      font-weight: 500;
+      color: #777;
+      margin-inline-start: 4px;
+    }
+
+    .product-label {
+      font-size: 11px;
+      color: #777;
+      margin-bottom: 2px;
+    }
+
+    .product-list {
+      font-size: 12px;
+      color: #555;
+      padding-inline-start: 18px;
+      margin-bottom: 10px;
+    }
+
+    body.lang-ar .product-list {
+      padding-inline-start: 0;
+      padding-inline-end: 18px;
+    }
+
+    .product-list li {
+      margin-bottom: 3px;
+    }
+
+    .product-footer {
+      margin-top: auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .product-footer-note {
+      font-size: 11px;
+      color: #777;
+    }
+
+    .product-pill {
+      font-size: 10px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    /* Info strips */
+    .strip {
+      background: #111;
+      color: #fff;
+      padding: 14px 16px;
+      margin-top: 10px;
+    }
+
+    .strip-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 18px;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+    }
+
+    .strip-pill {
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      font-size: 11px;
+    }
+
+    /* Why us / FAQ / Contact */
+    .why-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 18px;
+      align-items: flex-start;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.98);
+      border-radius: var(--radius-lg);
+      padding: 14px 16px;
+      box-shadow: var(--shadow-light);
+      border: 1px solid rgba(0, 0, 0, 0.04);
+    }
+
+    .card-title {
+      font-size: 16px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .card-list {
+      font-size: 13px;
+      color: #555;
+      padding-inline-start: 18px;
+    }
+
+    body.lang-ar .card-list {
+      padding-inline-start: 0;
+      padding-inline-end: 18px;
+    }
+
+    .card-list li {
+      margin-bottom: 5px;
+    }
+
+    .faq-item {
+      margin-bottom: 8px;
+    }
+
+    .faq-question {
+      font-size: 13px;
+      font-weight: 700;
+      color: #222;
+      margin-bottom: 2px;
+    }
+
+    .faq-answer {
+      font-size: 12px;
+      color: #666;
+    }
+
+    .contact-box {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 18px;
+      align-items: center;
+    }
+
+    .contact-main {
+      font-size: 14px;
+      color: #444;
+    }
+
+    .contact-main strong {
+      color: var(--primary-dark);
+    }
+
+    .contact-phone {
+      font-size: 18px;
+      font-weight: 800;
+      color: #111;
+      margin: 4px 0 6px;
+    }
+
+    .contact-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      font-size: 11px;
+      color: #666;
+    }
+
+    .contact-card {
+      background: #111;
+      color: #fff;
+      border-radius: var(--radius-lg);
+      padding: 14px 14px 12px;
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 12px;
+    }
+
+    .contact-card-label {
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 10px;
+      color: #bbb;
+    }
+
+    .contact-card-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .contact-city-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      font-size: 10px;
+    }
+
+    .contact-city-pill {
+      padding: 3px 7px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    footer {
+      padding: 12px 16px 20px;
+      font-size: 11px;
+      color: #777;
+      text-align: center;
+      background: #fafafa;
+      border-top: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    footer span {
+      color: var(--primary-dark);
+      font-weight: 700;
+    }
+
+    /* Language visibility */
+    .text-fr {
+      display: block;
+    }
+
+    .text-ar {
+      display: none;
+    }
+
+    body.lang-ar .text-fr {
+      display: none;
+    }
+
+    body.lang-ar .text-ar {
+      display: block;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero-grid,
+      .why-grid,
+      .contact-box {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .hero-card {
+        order: 1;
+      }
+
+      .hero-visual {
+        order: 2;
+      }
+
+      .hero-showcase {
+        margin-top: 6px;
+      }
+
+      header {
+        position: static;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <div class="brand">
+        <div class="brand-logo">FM</div>
+        <div>
+          <div class="brand-text-main">Extincteurs Maroc</div>
+          <div class="brand-text-sub text-fr">
+            Vente & livraison d’extincteurs dans tout le Maroc
+          </div>
+          <div class="brand-text-sub text-ar">
+            بيع و توصيل طفايات الحريق في جميع مدن المغرب
+          </div>
+        </div>
+      </div>
+      <div class="nav-actions">
+        <div class="lang-switch">
+          <button class="lang-btn active" data-lang="fr">Français</button>
+          <button class="lang-btn" data-lang="ar">العربية</button>
+        </div>
+        <div class="nav-contact">
+          <span>+212 6 99 28 95 68</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-card">
+          <div class="hero-chip-row">
+            <div class="hero-chip text-fr">Sécurité incendie à petit prix</div>
+            <div class="hero-chip text-ar">سلامة من الحريق بأثمنة مناسبة</div>
+            <div class="hero-chip-secondary">
+              1kg • 2kg • 2.5kg • 6kg • 8kg
+            </div>
+          </div>
+
+          <h1 class="hero-title text-fr">
+            Extincteurs livrés dans toutes les villes du Maroc
+          </h1>
+          <h1 class="hero-title text-ar">
+            طفايات حريق مع توصيل لجميع مدن المغرب
+          </h1>
+
+          <p class="hero-subtitle text-fr">
+            Protégez votre <strong>maison, voiture, magasin ou dépôt</strong>
+            avec des extincteurs de qualité, aux meilleurs prix du marché.
+          </p>
+          <p class="hero-subtitle text-ar">
+            احمِ <strong>منزلك، سيارتك، محلك أو مستودعك</strong>
+            بطفايات حريق ذات جودة و أثمنة ممتازة.
+          </p>
+
+          <div class="hero-badges">
+            <div class="hero-badge">
+              <div class="hero-badge-dot"></div>
+              <span class="text-fr">Livraison partout au Maroc</span>
+              <span class="text-ar">التوصيل لجميع المدن المغربية</span>
+            </div>
+            <div class="hero-badge">
+              🔥
+              <span class="text-fr">Idéal maison, voiture & commerce</span>
+              <span class="text-ar">مثالي للمنزل، السيارة و المحل</span>
+            </div>
+            <div class="hero-badge">
+              ✅
+              <span class="text-fr">Paiement à la livraison (selon ville)</span>
+              <span class="text-ar">الدفع عند التسليم (حسب المدينة)</span>
+            </div>
+          </div>
+
+          <div class="hero-actions">
+            <a
+              href="#products"
+              class="btn btn-primary"
+              id="btnViewProducts"
+            >
+              <span class="text-fr">Voir les extincteurs</span>
+              <span class="text-ar">عرض الطفايات</span>
+              ➜
+            </a>
+            <a
+              href="https://wa.me/212699289568?text=Bonjour%20je%20suis%20int%C3%A9ress%C3%A9%20par%20les%20extincteurs"
+              target="_blank"
+              class="btn btn-outline"
+            >
+              <span class="text-fr">Commander sur WhatsApp</span>
+              <span class="text-ar">الطلب عبر واتساب</span>
+              💬
+            </a>
+          </div>
+
+          <p class="hero-note text-fr">
+            Réponse rapide sur WhatsApp – conseils gratuits pour choisir
+            la bonne taille d’extincteur pour votre besoin. <span>Contact direct vendeur</span>.
+          </p>
+          <p class="hero-note text-ar">
+            رد سريع على واتساب – استشارة مجانية لاختيار الحجم المناسب
+            من طفاية الحريق حسب حاجتك. <span>تواصل مباشر مع البائع</span>.
+          </p>
+        </div>
+
+        <div class="hero-visual">
+          <div class="hero-showcase">
+            <div class="hero-showcase-label">
+              <span class="text-fr">Nos modèles les plus demandés</span>
+              <span class="text-ar">أكثر النماذج طلباً</span>
+            </div>
+
+            <div class="hero-ext-grid">
+              <!-- 1kg mini -->
+              <div class="mini-card">
+                <img
+                  src="https://raw.githubusercontent.com/ZakariaZemzamiLd/ZakariaZemzami/main/J7ByuxAXtoHp0zGQBu94SvpqRoICixhCJyW9qLj0.webp"
+                  alt="Extincteur 1kg"
+                />
+                <div class="mini-title text-fr">Extincteur 1kg</div>
+                <div class="mini-title text-ar">طفاية حريق 1 كلغ</div>
+                <div class="mini-sub text-fr">Idéal pour voiture</div>
+                <div class="mini-sub text-ar">مثالية للسيارات</div>
+                <div class="mini-price">100 DHS</div>
+                <div class="mini-pill text-fr">Pour les petits espaces</div>
+                <div class="mini-pill text-ar">مناسبة للأماكن الصغيرة</div>
+              </div>
+
+              <!-- 6kg mini -->
+              <div class="mini-card">
+                <img
+                  src="https://raw.githubusercontent.com/ZakariaZemzamiLd/ZakariaZemzami/main/items_16346_img_6859.jpg"
+                  alt="Extincteur 6kg"
+                />
+                <div class="mini-title text-fr">Extincteur 6kg</div>
+                <div class="mini-title text-ar">طفاية حريق 6 كلغ</div>
+                <div class="mini-sub text-fr">Magasins & dépôts</div>
+                <div class="mini-sub text-ar">المحلات و المستودعات</div>
+                <div class="mini-price">300 DHS</div>
+                <div class="mini-pill text-fr">Excellent rapport qualité/prix</div>
+                <div class="mini-pill text-ar">جودة عالية بثمن مناسب</div>
+              </div>
+            </div>
+
+            <div class="hero-tag-floating">
+              🔥
+              <span>1kg à 8kg</span>
+              <span class="text-fr">Livraison Maroc</span>
+              <span class="text-ar">توصيل في المغرب</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRODUCTS -->
+    <section id="products">
+      <div class="container">
+        <h2 class="section-title text-fr">Nos extincteurs & tarifs</h2>
+        <h2 class="section-title text-ar">أسعار طفايات الحريق المتوفرة</h2>
+
+        <p class="section-subtitle text-fr">
+          Choisissez la taille adaptée à votre besoin. Tous nos modèles sont neufs
+          et prêts à l’emploi.
+        </p>
+        <p class="section-subtitle text-ar">
+          اختر الحجم المناسب حسب حاجتك. جميع الطفايات جديدة و جاهزة للاستعمال.
+        </p>
+
+        <div class="products-grid">
+          <!-- 1kg -->
+          <article class="product-card" data-size="1kg">
+            <span class="product-tag text-fr">Voiture & petit espace</span>
+            <span class="product-tag text-ar">السيارات و الأماكن الصغيرة</span>
+            <span class="product-badge-size">1 KG</span>
+            <div class="product-image-wrapper">
+              <img
+                src="https://raw.githubusercontent.com/ZakariaZemzamiLd/ZakariaZemzami/main/J7ByuxAXtoHp0zGQBu94SvpqRoICixhCJyW9qLj0.webp"
+                alt="Extincteur 1kg"
+              />
+            </div>
+            <h3 class="product-title text-fr">Extincteur 1kg poudre</h3>
+            <h3 class="product-title text-ar">طفاية حريق 1 كلغ (بودرة)</h3>
+            <div class="product-price">
+              100 DHS
+              <span class="text-fr">pièce</span>
+              <span class="text-ar">للوحدة</span>
+            </div>
+            <div class="product-label text-fr">Idéal pour :</div>
+            <div class="product-label text-ar">مثالي لـ :</div>
+            <ul class="product-list">
+              <li class="text-fr">Voitures & camionnettes</li>
+              <li class="text-ar">السيارات و الشاحنات الصغيرة</li>
+              <li class="text-fr">Petits bureaux ou studios</li>
+              <li class="text-ar">المكاتب الصغيرة أو الاستوديوهات</li>
+              <li class="text-fr">Première protection à la maison</li>
+              <li class="text-ar">كحماية أولية في المنزل</li>
+            </ul>
+            <div class="product-footer">
+              <div class="product-footer-note text-fr">
+                Format compact, facile à fixer dans le véhicule.
+              </div>
+              <div class="product-footer-note text-ar">
+                حجم صغير، سهل التثبيت داخل السيارة.
+              </div>
+              <a
+                href="#"
+                class="btn btn-outline order-btn"
+                data-whats-text="Je veux commander l’extincteur 1kg (100 DHS)."
+              >
+                💬 WhatsApp
+              </a>
+            </div>
+          </article>
+
+          <!-- 2kg -->
+          <article class="product-card" data-size="2kg">
+            <span class="product-tag text-fr">Maison & bureau</span>
+            <span class="product-tag text-ar">المنزل و المكتب</span>
+            <span class="product-badge-size">2 KG</span>
+            <div class="product-image-wrapper">
+              <img
+                src="https://raw.githubusercontent.com/ZakariaZemzamiLd/ZakariaZemzami/main/480d8bba-6fba-4d90-9660-04bc848dc612.webp"
+                alt="Extincteur 2kg"
+              />
+            </div>
+            <h3 class="product-title text-fr">Extincteur 2kg poudre</h3>
+            <h3 class="product-title text-ar">طفاية حريق 2 كلغ (بودرة)</h3>
+            <div class="product-price">
+              150 DHS
+              <span class="text-fr">pièce</span>
+              <span class="text-ar">للوحدة</span>
+            </div>
+            <div class="product-label text-fr">Idéal pour :</div>
+            <div class="product-label text-ar">مثالي لـ :</div>
+            <ul class="product-list">
+              <li class="text-fr">Appartement, petit magasin</li>
+              <li class="text-ar">الشقق و المحلات الصغيرة</li>
+              <li class="text-fr">Bureau, salon de coiffure, cabinet...</li>
+              <li class="text-ar">المكاتب، صالونات الحلاقة، العيادات...</li>
+              <li class="text-fr">Petites cuisines</li>
+              <li class="text-ar">المطابخ الصغيرة</li>
+            </ul>
+            <div class="product-footer">
+              <div class="product-footer-note text-fr">
+                Très bon compromis entre taille et puissance.
+              </div>
+              <div class="product-footer-note text-ar">
+                توازن ممتاز بين الحجم و قوة الإطفاء.
+              </div>
+              <a
+                href="#"
+                class="btn btn-outline order-btn"
+                data-whats-text="Je veux commander l’extincteur 2kg (150 DHS)."
+              >
+                💬 WhatsApp
+              </a>
+            </div>
+          </article>
+
+          <!-- 2.5kg -->
+          <article class="product-card" data-size="2.5kg">
+            <span class="product-tag text-fr">Magasin & commerce</span>
+            <span class="product-tag text-ar">المحلات التجارية</span>
+            <span class="product-badge-size">2.5 KG</span>
+            <div class="product-image-wrapper">
+              <!-- Pas de photo fournie, style "label" -->
+              <div
+                style="
+                  width: 100%;
+                  height: 170px;
+                  border-radius: 12px;
+                  background: repeating-linear-gradient(
+                    135deg,
+                    #ffebee,
+                    #ffebee 6px,
+                    #ffcdd2 6px,
+                    #ffcdd2 12px
+                  );
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  font-size: 26px;
+                  font-weight: 900;
+                  color: #b71c1c;
+                "
+              >
+                2.5 KG
+              </div>
+            </div>
+            <h3 class="product-title text-fr">Extincteur 2,5kg poudre</h3>
+            <h3 class="product-title text-ar">طفاية حريق 2.5 كلغ (بودرة)</h3>
+            <div class="product-price">
+              200 DHS
+              <span class="text-fr">pièce</span>
+              <span class="text-ar">للوحدة</span>
+            </div>
+            <div class="product-label text-fr">Idéal pour :</div>
+            <div class="product-label text-ar">مثالي لـ :</div>
+            <ul class="product-list">
+              <li class="text-fr">Boutiques, mini-markets</li>
+              <li class="text-ar">البوتيكات و الميني مارشي</li>
+              <li class="text-fr">Dépôts de stock moyens</li>
+              <li class="text-ar">المستودعات المتوسطة</li>
+              <li class="text-fr">Ateliers et garages</li>
+              <li class="text-ar">الورشات و الكراجات</li>
+            </ul>
+            <div class="product-footer">
+              <div class="product-footer-note text-fr">
+                Protection renforcée pour usage professionnel léger.
+              </div>
+              <div class="product-footer-note text-ar">
+                حماية أقوى للاستعمال المهني الخفيف.
+              </div>
+              <a
+                href="#"
+                class="btn btn-outline order-btn"
+                data-whats-text="Je veux commander l’extincteur 2.5kg (200 DHS)."
+              >
+                💬 WhatsApp
+              </a>
+            </div>
+          </article>
+
+          <!-- 6kg -->
+          <article class="product-card" data-size="6kg">
+            <span class="product-tag text-fr">Magasin & dépôt</span>
+            <span class="product-tag text-ar">المحلات و المستودعات</span>
+            <span class="product-badge-size">6 KG</span>
+            <div class="product-image-wrapper">
+              <img
+                src="https://raw.githubusercontent.com/ZakariaZemzamiLd/ZakariaZemzami/main/items_16346_img_6859.jpg"
+                alt="Extincteur 6kg"
+              />
+            </div>
+            <h3 class="product-title text-fr">Extincteur 6kg poudre</h3>
+            <h3 class="product-title text-ar">طفاية حريق 6 كلغ (بودرة)</h3>
+            <div class="product-price">
+              300 DHS
+              <span class="text-fr">pièce</span>
+              <span class="text-ar">للوحدة</span>
+            </div>
+            <div class="product-label text-fr">Idéal pour :</div>
+            <div class="product-label text-ar">مثالي لـ :</div>
+            <ul class="product-list">
+              <li class="text-fr">Magasins, boutiques, grands locaux</li>
+              <li class="text-ar">المحلات، البوتيكات و الفضاءات الكبيرة</li>
+              <li class="text-fr">Dépôts, ateliers, parkings</li>
+              <li class="text-ar">المستودعات، الورشات، الباركينات</li>
+              <li class="text-fr">Immeubles, escaliers...</li>
+              <li class="text-ar">العمارات و السلالم...</li>
+            </ul>
+            <div class="product-footer">
+              <div class="product-footer-note text-fr">
+                Puissance d’extinction élevée pour zones à risque.
+              </div>
+              <div class="product-footer-note text-ar">
+                قوة إطفاء عالية للأماكن ذات الخطورة الأكبر.
+              </div>
+              <a
+                href="#"
+                class="btn btn-outline order-btn"
+                data-whats-text="Je veux commander l’extincteur 6kg (300 DHS)."
+              >
+                💬 WhatsApp
+              </a>
+            </div>
+          </article>
+
+          <!-- 8kg -->
+          <article class="product-card" data-size="8kg">
+            <span class="product-tag text-fr">Grande surface & dépôt</span>
+            <span class="product-tag text-ar">الفضاءات الواسعة و المستودعات</span>
+            <span class="product-badge-size">8 KG</span>
+            <div class="product-image-wrapper">
+              <img
+                src="https://raw.githubusercontent.com/ZakariaZemzamiLd/ZakariaZemzami/main/aa8b25ad-3eb8-4ae5-b0cc-2f846f30f716.webp"
+                alt="Extincteur 8kg"
+              />
+            </div>
+            <h3 class="product-title text-fr">Extincteur 8kg poudre</h3>
+            <h3 class="product-title text-ar">طفاية حريق 8 كلغ (بودرة)</h3>
+            <div class="product-price">
+              400 DHS
+              <span class="text-fr">pièce</span>
+              <span class="text-ar">للوحدة</span>
+            </div>
+            <div class="product-label text-fr">Idéal pour :</div>
+            <div class="product-label text-ar">مثالي لـ :</div>
+            <ul class="product-list">
+              <li class="text-fr">Grands dépôts & ateliers</li>
+              <li class="text-ar">المستودعات و الورشات الكبيرة</li>
+              <li class="text-fr">Industrie légère, parkings souterrains</li>
+              <li class="text-ar">الصناعة الخفيفة و الباركينات الكبيرة</li>
+              <li class="text-fr">Zones à risque élevé</li>
+              <li class="text-ar">الأماكن ذات الخطورة العالية</li>
+            </ul>
+            <div class="product-footer">
+              <div class="product-footer-note text-fr">
+                Très puissant pour une protection maximale.
+              </div>
+              <div class="product-footer-note text-ar">
+                قوة كبيرة لحماية قصوى من الحرائق.
+              </div>
+              <a
+                href="#"
+                class="btn btn-outline order-btn"
+                data-whats-text="Je veux commander l’extincteur 8kg (400 DHS)."
+              >
+                💬 WhatsApp
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- STRIP -->
+    <div class="strip">
+      <div class="strip-inner">
+        <div>
+          <span class="text-fr">
+            📦 Livraison disponible dans toutes les villes du Maroc.
+          </span>
+          <span class="text-ar">
+            📦 التوصيل متوفر إلى جميع مدن المغرب.
+          </span>
+        </div>
+        <div class="strip-pill">
+          <span class="text-fr">Contact WhatsApp direct : +212 6 99 28 95 68</span>
+          <span class="text-ar">واتساب مباشر : 212699289568+</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- WHY & FAQ -->
+    <section>
+      <div class="container why-grid">
+        <div class="card">
+          <h3 class="card-title text-fr">Pourquoi installer un extincteur ?</h3>
+          <h3 class="card-title text-ar">لماذا يجب أن تتوفر على طفاية حريق؟</h3>
+          <ul class="card-list">
+            <li class="text-fr">
+              Un petit extincteur peut arrêter un feu dès les premières secondes
+              et éviter un grand dégât.
+            </li>
+            <li class="text-ar">
+              طفاية صغيرة يمكن أن توقف الحريق في ثواني الأولى و تمنع كارثة كبيرة.
+            </li>
+            <li class="text-fr">
+              Recommandé pour tout commerce, dépôt, bureau ou appartement.
+            </li>
+            <li class="text-ar">
+              ينصَح بها في كل محل تجاري، مستودع، مكتب أو شقة.
+            </li>
+            <li class="text-fr">
+              Obligatoire dans plusieurs locaux (garages, ateliers, parkings...).
+            </li>
+            <li class="text-ar">
+              ضرورية في عدة أماكن مثل الكراجات، الورشات، الباركينات...
+            </li>
+            <li class="text-fr">
+              Rassure vos clients, votre famille et vos employés.
+            </li>
+            <li class="text-ar">
+              تعطي إحساساً بالأمان لعائلتك، زبنائك و العاملين معك.
+            </li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3 class="card-title text-fr">Questions fréquentes</h3>
+          <h3 class="card-title text-ar">أسئلة شائعة</h3>
+
+          <div class="faq-item">
+            <div class="faq-question text-fr">Comment passer commande ?</div>
+            <div class="faq-question text-ar">كيف أطلب؟</div>
+            <div class="faq-answer text-fr">
+              Contactez-nous directement sur WhatsApp, indiquez le ou les modèles
+              (1kg, 2kg, 2.5kg, 6kg, 8kg) et la ville. Nous vous répondons rapidement.
+            </div>
+            <div class="faq-answer text-ar">
+              تواصل معنا مباشرة عبر واتساب، اكتب الحجم الذي تريده
+              (1kg, 2kg, 2.5kg, 6kg, 8kg) و المدينة، و سنجيبك بسرعة.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question text-fr">Livrez-vous dans toutes les villes ?</div>
+            <div class="faq-question text-ar">هل التوصيل لكل المدن؟</div>
+            <div class="faq-answer text-fr">
+              Oui, la livraison est possible vers toutes les villes du Maroc
+              (délai et frais selon la ville).
+            </div>
+            <div class="faq-answer text-ar">
+              نعم، التوصيل متوفر لجميع مدن المغرب (المدة و الثمن يختلفان حسب المدينة).
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question text-fr">Comment choisir la bonne taille ?</div>
+            <div class="faq-question text-ar">كيف أختار الحجم المناسب؟</div>
+            <div class="faq-answer text-fr">
+              1kg pour voiture, 2kg pour appartement ou petit bureau,
+              2.5kg pour magasins, 6kg et 8kg pour dépôts, ateliers et grands espaces.
+            </div>
+            <div class="faq-answer text-ar">
+              1kg للسيارة، 2kg للشقة أو المكتب الصغير،
+              2.5kg للمحلات، و 6kg و 8kg للمستودعات، الورشات و الفضاءات الكبيرة.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section>
+      <div class="container contact-box">
+        <div class="contact-main">
+          <p class="text-fr">
+            Pour toute commande ou information, contactez-nous directement :
+          </p>
+          <p class="text-ar">
+            للطلب أو لأي استفسار، تواصل معنا مباشرة:
+          </p>
+
+          <div class="contact-phone">+212 6 99 28 95 68</div>
+
+          <div class="contact-badges">
+            <span>WhatsApp</span>
+            <span class="text-fr">Appel téléphonique</span>
+            <span class="text-ar">مكالمة هاتفية</span>
+          </div>
+
+          <div style="margin-top: 12px;">
+            <a
+              href="https://wa.me/212699289568?text=Bonjour%20je%20veux%20des%20informations%20sur%20les%20extincteurs."
+              target="_blank"
+              class="btn btn-primary"
+            >
+              💬 WhatsApp
+              <span class="text-fr">Envoyer un message</span>
+              <span class="text-ar">إرسال رسالة</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="contact-card">
+          <div class="contact-card-label text-fr">Livraison partout au Maroc</div>
+          <div class="contact-card-label text-ar">التوصيل في جميع مدن المغرب</div>
+
+          <div class="contact-card-row">
+            <div>
+              <div style="font-size: 14px; font-weight: 700;">
+                <span class="text-fr">Villes principales</span>
+                <span class="text-ar">المدن الرئيسية</span>
+              </div>
+              <div style="font-size: 11px; color: #ccc;">
+                Casablanca • Rabat • Marrakech • Agadir • Tanger • Fès ...
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-city-badges">
+            <div class="contact-city-pill">Casablanca</div>
+            <div class="contact-city-pill">Rabat</div>
+            <div class="contact-city-pill">Marrakech</div>
+            <div class="contact-city-pill">Agadir</div>
+            <div class="contact-city-pill">Tanger</div>
+            <div class="contact-city-pill">Fès</div>
+            <div class="contact-city-pill">Oujda</div>
+          </div>
+
+          <div style="font-size: 10px; color: #bbb; margin-top: 6px;">
+            <span class="text-fr">
+              Les frais & délais de livraison varient selon la ville. Demandez les détails sur WhatsApp.
+            </span>
+            <span class="text-ar">
+              ثمن و مدة التوصيل يختلفان حسب المدينة. اسأل عن التفاصيل في واتساب.
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>Extincteurs Maroc</span> – 1kg (100 DHS) • 2kg (150 DHS) • 2.5kg (200 DHS)
+    • 6kg (300 DHS) • 8kg (400 DHS) – Livraison dans toutes les villes du Maroc.
+  </footer>
+
+  <script>
+    // Language switch
+    const langButtons = document.querySelectorAll(".lang-btn");
+    const body = document.body;
+
+    langButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const lang = btn.getAttribute("data-lang");
+
+        langButtons.forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+
+        if (lang === "ar") {
+          body.classList.add("lang-ar");
+        } else {
+          body.classList.remove("lang-ar");
+        }
+      });
+    });
+
+    // Smooth scroll to products
+    const btnViewProducts = document.getElementById("btnViewProducts");
+    btnViewProducts.addEventListener("click", (e) => {
+      e.preventDefault();
+      const productsSection = document.querySelector("#products");
+      if (productsSection) {
+        productsSection.scrollIntoView({ behavior: "smooth" });
+      }
+    });
+
+    // WhatsApp order buttons per product
+    const orderButtons = document.querySelectorAll(".order-btn");
+    const baseWhats = "https://wa.me/212699289568?text=";
+
+    orderButtons.forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        const text = btn.getAttribute("data-whats-text") || "Bonjour";
+        const encoded = encodeURIComponent(text + " Merci.");
+        window.open(baseWhats + encoded, "_blank");
+      });
+    });
+  </script>
+</body>
+</html>
